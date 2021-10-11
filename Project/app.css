@@ -1,0 +1,30 @@
+.login-btn {
+	width:100px;
+}
+
+.btn-outline-primary {
+	border-color:#60a9ff;
+}
+
+.btn-home {
+	width:95%;
+	height:200px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	border-radius: 40%;
+}
+
+.btn-health {
+	background-image: url('bin/heart.png');
+	background-size:auto;
+}
+
+.btn-assignments {
+	background-image: url('bin/assignments.jpg');
+	background-size:auto;
+}
+
+/*#home-background {
+	background: url('bin/home-background-img.jpg') no-repeat center center;
+	background-size: auto;
+}*/
