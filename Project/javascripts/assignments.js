@@ -1,6 +1,11 @@
+//change the color to just take the name of the subject, and correspond that to the color
+
 // createAssignmentBlock is designed to create a block containing
 // the information needed to display it to the user.
-
+//
+// Preconditions: subjectColor is a valid CSS color, assignmentName
+// is a valid length, and dueTime is of proper format
+//
 // @param subjectColor
 //        The color of the subject the assignment is for; ex. Red
 // @param assignmentName

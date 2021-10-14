@@ -34,7 +34,7 @@
 	text-align: center;
 	display: block;
 	border-radius: 9px;
-	background-image: linear-gradient(to right, red, red 25%, transparent 25%, transparent 100%);
+	background-color: white;
 }
 .assignment-block-btn:hover {
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -51,6 +51,9 @@
 	margin-left: 27%;
 }
 
+#assignment-block-container {
+	margin: 20px 0;
+}
 
 /*#home-background {
 	background: url('bin/home-background-img.jpg') no-repeat center center;
