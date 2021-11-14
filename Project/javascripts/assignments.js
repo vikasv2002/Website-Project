@@ -35,7 +35,8 @@ function createAssignmentBlock(subjectColor, assignmentName, dueTime){
   return divBlock;
 }
 
-const assignmentBlock = createAssignmentBlock("red", "Assignment Name", "11:59 pm");
-const assignmentBlock2 = createAssignmentBlock("blue", "Assignment Name 2", "11:15 am");
-const assignmentBlock3 = createAssignmentBlock("#00FF00", "Assignment Name Super Long", "11:59 pm");
-document.getElementById("assignment-block-container").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
+const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
+const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
+const assignmentBlock3 = createAssignmentBlock("red", "Quiz 6", "11:59 pm");
+const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm");
+document.getElementById("assignment-block-container").append(assignmentBlock, assignmentBlock2, assignmentBlock3, assignmentBlock4);
