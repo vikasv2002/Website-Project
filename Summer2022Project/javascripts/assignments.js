@@ -54,6 +54,7 @@ function createAssignmentBlock(subjectColor, assignmentName, dueTime){
     return assignmentContainer;
 }
 
+// testing by manually creating the assignment blocks
 const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
 const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
 const assignmentBlock3 = createAssignmentBlock("green", "Quiz 6", "11:59 pm");
@@ -61,14 +62,55 @@ const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm"
 document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
 document.getElementById("c1").append(assignmentBlock4);
 
-const form = document.getElementById("form");
 
-function serializeForm(){
-    form.addEventListener('submit', function(){
-        console.log($('form').serialize());
-    })
+// when the add assignment button is clicked it calls the createEventListener() function
+document.getElementById("addAssignmentBtn").addEventListener("click", async function (){
+    createFormEventListener();
+});
+
+
+
+// this function creates an event listener for when the form is submitted
+function createFormEventListener() {
+    const form = document.getElementById("form");
+    if (form){
+        form.addEventListener("submit", validateForm );
+    }
 }
 
-const addAssignmentButton = document.getElementById("addAssignmentBtn");
+// this function validates the form by making sure the entries are valid
+function validateForm(event){
+    const form = event.target;
+    // checks to see if the element is a form element
+    if (form.tagName == 'FORM' && form.id == "form"){
+        const formData = new FormData(form);
+        // get all the data from the form
+        const values = Array.from(formData.values());
+        // check if the assignment name is to long
+        if (values[0].length > 256){
+            alert("Assignment name too many characters (max 256)");
+            event.preventDefault();
+            // ************* reset name field ***************
+            return;
+        }
+        // check if the color is valid
+        const colors = ['red', 'blue', 'black', 'green', 'yellow', 'orange', 'purple', 'pink']
+        if (!colors.includes(values[1].toLowerCase())){
+            alert("Not a valid color!");
+            event.preventDefault();
+            // ************* reset color field ***************
+            return;
+        }
+        // ****************** check if time is valid *********************
 
-addAssignmentButton.addEventListener("click")
+
+        // all form elements are valid so create the block
+        const assignmentElement = createAssignmentBlock(values[0], values[1], values[2]);
+
+        // ******************* add to correct day container *********************
+        document.getElementById("c6").append(assignmentElement);
+    }
+    else{
+        console.log("not a form element");
+    }
+};
