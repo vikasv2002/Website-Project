@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+	<!--
 	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="index.html">Vikas' Website</a>
@@ -36,9 +36,41 @@
 
 		</div>
 	</nav>
+	-->
 
 	<div class="container-fluid" id="assignment-block-container">
-		<button class="btn btn-primary" style="width:150px;">Add Assignment</button>
+
+
+
+
+
+		<button onclick="document.getElementById('addAssignmentForm').style.display='block'" id= "addAssignment" class="btn btn-primary" style="width:150px;">Add Assignment</button>
+		<div id="addAssignmentForm" class = "assignForm">
+			<form id="form" class="form-content animate" action="">
+				<!-- x close button top right -->
+				<span onclick="document.getElementById('addAssignmentForm').style.display='none'" class="btn-close" title="Close Form">&times;</span>
+			    <div class="imgcontainer">
+	  				<img src="bin/assignments.jpg" alt="Assignments icon" class="assignmentsIcon">
+				</div>
+				<div class="container form-body">
+				 	<label for="assignName"><b>Name</b></label>
+				 	<input id="assignName" type="text" placeholder="Enter Assignment Name" name="assignName" required>
+
+				  	<label for="subjectColor"><b>Subject Color</b></label>
+				  	<input id="subjectColor" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+
+				  	<label for="dueTime"><b>Complete By</b></label>
+				  	<input id="dueTime" type="text" placeholder="Enter the Due Date" name="dueTime" required>
+
+				  	<button type="submit" id="assignSubmit">Add</button>
+				</div>
+			</form>
+		</div>
+
+
+
+
+
 		<div class="dropdown" style="display:inline;">
 		  <button class="btn btn-primary dropdown-toggle" style="float:right;" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
 		    Sort By

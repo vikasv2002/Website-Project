@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+	<title>Assignments</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="app.css">
+</head>
+
+<body>
+    <!-- main container for everything -->
+    <div class = "container-fluid">
+        <!-- container for the two buttons and the text -->
+        <div class = "container-fluid" id = "button-display-format-container">
+            <!-- Top row containing the buttons and the text -->
+            <div class = "row">
+                <div class = "col-2 button-alignment" style= "justify-content: flex-start;">
+                    <!-- add assignment button -->
+                    <button id = "addAssignmentBtn" onclick="document.getElementById('addAssignmentForm').style.display='block'" class="btn btn-primary" style="width:150px;">Add Assignment</button>
+                </div>
+                <div class = "col-8">
+                    <!-- display format name (e.g. week, day) -->
+                    <h1 id = "display-format-name">Week (Fixed)</h1>
+                </div>
+                <div class = "col-2 button-alignment" style= "justify-content: flex-end;">
+                    <!-- sort by button -->
+                    <button class = "btn btn-primary dropdown-toggle" type = "button" id="dropdownMenu2"
+                    data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                    <!-- items contained in the drop down menue -->
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><button class="dropdown-item" type="button">Upcoming</button></li>
+                        <li><button class="dropdown-item" type="button">Week</button></li>
+                        <li><button class="dropdown-item" type="button">Day</button></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+        <!-- container for the days of the week -->
+        <div class = "container-fluid" style="margin-top: 30px;">
+            <!-- row containing the names of the week -->
+            <div class = "row" style="text-align: center;">
+                <div class = "col dotw">Sunday</div>
+                <div class = "col dotw">Monday</div>
+                <div class = "col dotw">Tuesday</div>
+                <div class = "col dotw">Wednesday</div>
+                <div class = "col dotw">Thursday</div>
+                <div class = "col dotw">Friday</div>
+                <div class = "col last-dotw">Saturday</div>
+            </div>
+        </div>
+        <!-- container for the main content grid -->
+        <div class = "container-fluid">
+            <div class="row">
+                <!-- every vertical column to place entries into -->
+                <div id = "c0" class = "col vert-entries"></div>
+                <div id = "c1" class = "col vert-entries">
+                    <!-- an entry -->
+                    <div class="container-fluid assignment-block-btn btn" style = "background-image: linear-gradient(to right, red, red 25%, transparent 25%, transparent 100%);">
+                        <!-- assignment name container -->
+                        <div class = "container-fluid assignment-block-name">
+                            <h6 class = "assignment-name">Speech 3</h6>
+                        </div>
+                        <!-- complete by container -->
+                        <div class = "container-fluid assignment-block-time">
+                            <p class = "assignment-time">Complete by: 11:15am</p>
+                        </div>
+                    </div>
+                </div>
+                <div id = "c2" class = "col vert-entries"></div>
+                <div id = "c3" class = "col vert-entries"></div>
+                <div id = "c4" class = "col vert-entries"></div>
+                <div id = "c5" class = "col vert-entries"></div>
+                <div id = "c6" class = "col vert-entries"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/assignments.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+
+<!-- add assignment form container -->
+<div id="addAssignmentForm">
+    <!-- the add assignments form -->
+    <form id="form" class="form-content animate" action="">
+        <!-- x close button top right -->
+        <span onclick="document.getElementById('addAssignmentForm').style.display='none'" class="btn-close" title="Close Form">&times;</span>
+        <!-- Assignment Icon on form -->
+        <div class="imgcontainer">
+            <img src="bin/assignments.jpg" alt="Assignments icon" class="assignmentsIcon">
+        </div>
+        <!-- form body -->
+        <div class="container form-body">
+            <label for="assignName"><b>Name</b></label>
+            <input id="assignName" type="text" placeholder="Enter Assignment Name" name="assignName" required>
+
+             <label for="subjectColor"><b>Subject Color</b></label>
+             <input id="subjectColor" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+
+             <label for="dueTime"><b>Complete By</b></label>
+             <input id="dueTime" type="text" placeholder="Enter the Due Date" name="dueTime" required>
+
+             <button type="submit" id="assignSubmit">Add</button>
+        </div>
+    </form>
+</div>
+</html>

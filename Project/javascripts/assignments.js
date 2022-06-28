@@ -39,4 +39,27 @@ const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
 const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
 const assignmentBlock3 = createAssignmentBlock("red", "Quiz 6", "11:59 pm");
 const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm");
-document.getElementById("assignment-block-container").append(assignmentBlock, assignmentBlock2, assignmentBlock3, assignmentBlock4);
+document.getElementById("assignment-block-container").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
+
+// const formAssignmentName = document.getElementById('assignName');
+// const formSubjectColor = document.getElementById('subjectColor');
+// const formDueTime = document.getElementById('dueTime');
+
+const form = document.getElementById("form");
+const inputs = form.elements;
+
+form.addEventListener('submit', (e) => {
+  const colors = ['red', 'blue', 'black', 'green', 'yellow', 'orange', 'purple', 'pink']
+  if (!colors.includes(inputs[1].value.toLowerCase())){
+    alert("Must be a valid color!");
+  }
+  else{
+    const temp = createAssignmentBlock(inputs[1].value, inputs[0].value, inputs[2].value);
+    document.getElementById("assignment-block-container").append(assignmentBlock4);
+    document.getElementById("assignment-block-container").append(temp);
+  }
+
+})
+
+const addAssignmentBtn = document.getElementById("addAssignment");
+
