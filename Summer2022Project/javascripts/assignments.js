@@ -120,15 +120,16 @@ function validateForm(event){
     }
 };
 
+// deletes an assignment block
 function deleteAssignmentBlock (event) {
+    // gets the target of the double clicks (could be a p/h6 tag or the div for those tags)
     const element = event.target;
-    console.log(element.classList);
-    element.parentNode.parentNode.removeChild(element.parentNode);
-
-
-    // if (! element.classList.contains("assignment-block-btn"))
-    //     return;
-    // else {
-    //     return;
-    // }
+    // if its one of the divs that was double clicked
+    if (element.classList.contains("assignment-block-name") || element.classList.contains("assignment-block-time"))
+        // remove the outer most div container for the assignment block
+        element.parentNode.parentNode.removeChild(element.parentNode);
+    // if its the p tag or h6 tag text that was double clicked
+    else
+        // remove the outer most div container for the assignment block
+        element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
 }
