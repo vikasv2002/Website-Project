@@ -3,6 +3,9 @@
 //
 // Preconditions: subjectColor is a valid CSS color, assignmentName
 // is a valid length, and dueTime is of proper format
+// 
+// Postconditions: an EventListener is placed on the return element and
+// when that element is double clicked, it is deleted from the document
 //
 // @param subjectColor
 //        The color of the subject the assignment is for; ex. Red
@@ -50,6 +53,8 @@ function createAssignmentBlock(subjectColor, assignmentName, dueTime){
 
     // append both containers to outside container
     assignmentContainer.append(nameContainer, timeContainer);
+    // add an event listener
+    assignmentContainer.addEventListener("dblclick", deleteAssignmentBlock);
     // return item
     return assignmentContainer;
 }
@@ -114,3 +119,16 @@ function validateForm(event){
         console.log("not a form element");
     }
 };
+
+function deleteAssignmentBlock (event) {
+    const element = event.target;
+    console.log(element.classList);
+    element.parentNode.parentNode.removeChild(element.parentNode);
+
+
+    // if (! element.classList.contains("assignment-block-btn"))
+    //     return;
+    // else {
+    //     return;
+    // }
+}
