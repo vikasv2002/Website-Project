@@ -41,13 +41,13 @@
         <div class = "container-fluid" style="margin-top: 30px;">
             <!-- row containing the names of the week -->
             <div class = "row" style="text-align: center;">
-                <div class = "col dotw">Sunday</div>
-                <div class = "col dotw">Monday</div>
-                <div class = "col dotw">Tuesday</div>
-                <div class = "col dotw">Wednesday</div>
-                <div class = "col dotw">Thursday</div>
-                <div class = "col dotw">Friday</div>
-                <div class = "col last-dotw">Saturday</div>
+                <div id = "day-0" class = "col dotw">Sunday<br>26</div>
+                <div id = "day-1" class = "col dotw">Monday<br>27</div>
+                <div id = "day-2" class = "col dotw">Tuesday<br>28</div>
+                <div id = "day-3" class = "col dotw">Wednesday<br>29</div>
+                <div id = "day-4" class = "col dotw">Thursday<br>30</div>
+                <div id = "day-5" class = "col dotw">Friday<br>1</div>
+                <div id = "day-6" class = "col last-dotw">Saturday<br>2</div>
             </div>
         </div>
         <!-- container for the main content grid -->
@@ -85,17 +85,22 @@
             <label for="assignName"><b>Name</b></label>
             <input id="assignName" type="text" placeholder="Enter Assignment Name" name="assignName" required>
 
-             <label for="subjectColor"><b>Subject Color</b></label>
-             <input id="subjectColor" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+            <label for="subjectColor"><b>Subject Color</b></label>
+            <input id="subjectColor" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
 
-             <label for="dueTime"><b>Complete By</b></label>
-             <input id="dueTime" type="text" placeholder="Enter the Due Date" name="dueTime" required>
+            <label for="dueDate"><b>Due Date</b></label>
+            <input id="dueDate" type="text" placeholder="Enter the Due Date (mm/dd/yyyy)" name="dueDate" required>
 
-             <button type="submit" id="assignSubmit">Add</button>
+            <label for="dueTime"><b>Complete By</b></label>
+            <input id="dueTime" type="text" placeholder="Enter the Due Time" name="dueTime" required>
+
+            <button type="submit" id="assignSubmit">Add</button>
         </div>
     </form>
 </div>
 </html>
+
+
 
 
 <!-- 

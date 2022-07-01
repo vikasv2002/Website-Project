@@ -59,21 +59,6 @@ function createAssignmentBlock(subjectColor, assignmentName, dueTime){
     return assignmentContainer;
 }
 
-// testing by manually creating the assignment blocks
-const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
-const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
-const assignmentBlock3 = createAssignmentBlock("green", "Quiz 6", "11:59 pm");
-const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm");
-document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
-document.getElementById("c1").append(assignmentBlock4);
-
-
-// when the add assignment button is clicked it calls the createEventListener() function
-document.getElementById("addAssignmentBtn").addEventListener("click", async function (){
-    createFormEventListener();
-});
-
-
 
 // this function creates an event listener for when the form is submitted
 function createFormEventListener() {
@@ -133,3 +118,21 @@ function deleteAssignmentBlock (event) {
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
 }
+
+// when the add assignment button is clicked it calls the createEventListener() function
+document.getElementById("addAssignmentBtn").addEventListener("click", async function (){
+    createFormEventListener();
+});
+
+// sets the current day backround to be blue
+document.getElementById("day-" + new Date().getDay()).classList.add("current-day");
+
+
+// testing by manually creating the assignment blocks
+const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
+const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
+const assignmentBlock3 = createAssignmentBlock("green", "Quiz 6", "11:59 pm");
+const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm");
+document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
+document.getElementById("c1").append(assignmentBlock4);
+
