@@ -119,6 +119,31 @@ function deleteAssignmentBlock (event) {
         element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
 }
 
+// sets the numbers for the days of the week and background for the current day
+function setDayNumbers (){
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    // holds the current date
+    var date = new Date();
+    // holds the index of the current date (ex. Tuesday = 2, Sunday = 0)
+    const currrentDOTWIndex = weekdays.indexOf(date.toLocaleDateString('en-us', {weekday: 'long'}));
+    // sets the day numbers for the current date and the days before it
+    for (let i = currrentDOTWIndex; i >= 0; i--){
+        // gets the element and changes the inside content
+        document.getElementById("day-" + date.getDay()).innerHTML = weekdays[i] + "<br />" + date.getDate();
+        date.setDate(date.getDate() - 1);
+    }
+    // resets to the current date
+    date = new Date();
+    // sets the day numbers for the days after the current date
+    for (let i = currrentDOTWIndex + 1; i < 7; i++){
+        // increments to the next day
+        date.setDate(date.getDate() + 1);
+        // gets the element and changes the inside content
+        document.getElementById("day-" + date.getDay()).innerHTML = weekdays[i] + "<br />" + date.getDate();
+    }
+}
+
+
 // when the add assignment button is clicked it calls the createEventListener() function
 document.getElementById("addAssignmentBtn").addEventListener("click", async function (){
     createFormEventListener();
@@ -136,3 +161,4 @@ const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm"
 document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
 document.getElementById("c1").append(assignmentBlock4);
 
+setDayNumbers ();
