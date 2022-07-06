@@ -123,8 +123,7 @@ function deleteAssignmentBlock (event) {
 function setDayNumbers (d){
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     // holds the current date
-    var date = new Date();
-    date.setDate(d.getDate());
+    var date = new Date(d.getTime());
     // holds the index of the current date (ex. Tuesday = 2, Sunday = 0)
     const currrentDOTWIndex = weekdays.indexOf(date.toLocaleDateString('en-us', {weekday: 'long'}));
     // sets the day numbers for the current date and the days before it
@@ -134,8 +133,7 @@ function setDayNumbers (d){
         date.setDate(date.getDate() - 1);
     }
     // resets to the current date
-    date = new Date();
-    date.setDate(d.getDate());
+    date = new Date(d.getTime());
     // sets the day numbers for the days after the current date
     for (let i = currrentDOTWIndex + 1; i < 7; i++){
         // increments to the next day
@@ -144,12 +142,31 @@ function setDayNumbers (d){
         document.getElementById("day-" + date.getDay()).innerHTML = weekdays[i] + "<br />" + date.getDate();
     }
 }
+// holds the current day the screen is showing
+var currentDate = new Date();
 
 // add an event listener to the week arrows
     // left week arrow
 document.getElementById("left-week-arrow").addEventListener("click", function() {
-    
+    document.getElementById("day-" + new Date().getDay()).classList.remove("current-day");
+    currentDate.setDate(currentDate.getDate() - 7);
+    setDayNumbers(currentDate);
+    if (currentDate.getDay() == new Date().getDay() && currentDate.getFullYear() == new Date().getFullYear() && currentDate.getDate() == new Date().getDate()){
+        // sets the current day backround to be blue
+        document.getElementById("day-" + new Date().getDay()).classList.add("current-day");
+    }
 });
+    // right week arrow
+document.getElementById("right-week-arrow").addEventListener("click", function() {
+    document.getElementById("day-" + new Date().getDay()).classList.remove("current-day");
+    currentDate.setDate(currentDate.getDate() + 7);
+    setDayNumbers(currentDate);
+    if (currentDate.getDay() == new Date().getDay() && currentDate.getFullYear() == new Date().getFullYear() && currentDate.getDate() == new Date().getDate()){
+        // sets the current day backround to be blue
+        document.getElementById("day-" + new Date().getDay()).classList.add("current-day");
+    }
+});
+
 
 // when the add assignment button is clicked it calls the createEventListener() function
 document.getElementById("addAssignmentBtn").addEventListener("click", async function (){
