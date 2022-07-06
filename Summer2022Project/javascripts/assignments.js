@@ -176,6 +176,8 @@ document.getElementById("addAssignmentBtn").addEventListener("click", async func
 // sets the current day backround to be blue
 document.getElementById("day-" + new Date().getDay()).classList.add("current-day");
 
+// sets the day numbers
+setDayNumbers (new Date());
 
 // testing by manually creating the assignment blocks
 const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
@@ -185,4 +187,3 @@ const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm"
 document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
 document.getElementById("c1").append(assignmentBlock4);
 
-setDayNumbers (new Date());
