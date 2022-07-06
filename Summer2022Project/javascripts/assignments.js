@@ -143,6 +143,11 @@ function setDayNumbers (){
     }
 }
 
+// add an event listener to the week arrows
+    // left week arrow
+document.getElementById("left-week-arrow").addEventListener("click", function() {
+    
+});
 
 // when the add assignment button is clicked it calls the createEventListener() function
 document.getElementById("addAssignmentBtn").addEventListener("click", async function (){

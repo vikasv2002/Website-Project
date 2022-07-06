@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 	<title>Assignments</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="app.css">
+	<script src="https://kit.fontawesome.com/037e4325b4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="app.css">
 </head>
 
 <body>
@@ -22,7 +23,11 @@
                 </div>
                 <div class = "col-8">
                     <!-- display format name (e.g. week, day) -->
-                    <h1 id = "display-format-name">Week</h1>
+                    <h1 id = "display-format-name"  style = "display: flex; gap: 50px; justify-content: center; align-items: flex-end;">
+                        <i id = "left-week-arrow" class="fa-solid fa-angle-left"></i>
+                        Week
+                        <i id = "right-week-arrow" class="fa-solid fa-angle-right"></i>
+                    </h1>
                 </div>
                 <div class = "col-2 button-alignment" style= "justify-content: flex-end;">
                     <!-- sort by button -->
