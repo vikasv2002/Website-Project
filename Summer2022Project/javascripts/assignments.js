@@ -120,10 +120,11 @@ function deleteAssignmentBlock (event) {
 }
 
 // sets the numbers for the days of the week and background for the current day
-function setDayNumbers (){
+function setDayNumbers (d){
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     // holds the current date
     var date = new Date();
+    date.setDate(d.getDate());
     // holds the index of the current date (ex. Tuesday = 2, Sunday = 0)
     const currrentDOTWIndex = weekdays.indexOf(date.toLocaleDateString('en-us', {weekday: 'long'}));
     // sets the day numbers for the current date and the days before it
@@ -134,6 +135,7 @@ function setDayNumbers (){
     }
     // resets to the current date
     date = new Date();
+    date.setDate(d.getDate());
     // sets the day numbers for the days after the current date
     for (let i = currrentDOTWIndex + 1; i < 7; i++){
         // increments to the next day
@@ -166,4 +168,4 @@ const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm"
 document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
 document.getElementById("c1").append(assignmentBlock4);
 
-setDayNumbers ();
+setDayNumbers (new Date());
