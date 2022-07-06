@@ -129,6 +129,10 @@
 	padding-bottom: 100px; 
 }
 
+#month-name {
+	min-width: 300px;
+}
+
 .imgcontainer {
 	text-align: center;
 	margin: 24px 0 12px 0;

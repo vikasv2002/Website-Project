@@ -142,6 +142,26 @@ function setDayNumbers (d){
         document.getElementById("day-" + date.getDay()).innerHTML = weekdays[i] + "<br />" + date.getDate();
     }
 }
+
+function setMonthName (d){
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    // if we are on the default week
+    if (document.getElementById("day-" + new Date().getDay()).classList.contains("current-day")){
+        // sets the month name
+        document.getElementById("month-name").innerHTML = months[new Date().getMonth()] + " " + new Date().getFullYear();
+    }
+    else{
+        var date = new Date(d.getTime());
+        date.setDate(date.getDate() + (3 - date.getDay()));
+        // sets the month name
+        document.getElementById("month-name").innerHTML = months[date.getMonth()] + " " + date.getFullYear();
+    }
+}
+
+
+
+
+
 // holds the current day the screen is showing
 var currentDate = new Date();
 
@@ -155,6 +175,7 @@ document.getElementById("left-week-arrow").addEventListener("click", function() 
         // sets the current day backround to be blue
         document.getElementById("day-" + new Date().getDay()).classList.add("current-day");
     }
+    setMonthName(currentDate);
 });
     // right week arrow
 document.getElementById("right-week-arrow").addEventListener("click", function() {
@@ -165,6 +186,7 @@ document.getElementById("right-week-arrow").addEventListener("click", function()
         // sets the current day backround to be blue
         document.getElementById("day-" + new Date().getDay()).classList.add("current-day");
     }
+    setMonthName(currentDate);
 });
 
 
@@ -178,6 +200,9 @@ document.getElementById("day-" + new Date().getDay()).classList.add("current-day
 
 // sets the day numbers
 setDayNumbers (new Date());
+
+// sets the month name
+setMonthName (new Date());
 
 // testing by manually creating the assignment blocks
 const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
