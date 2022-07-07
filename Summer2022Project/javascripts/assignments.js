@@ -6,6 +6,9 @@
 // 
 // Postconditions: an EventListener is placed on the return element and
 // when that element is double clicked, it is deleted from the document
+//     txt document containing all assignment blocks is updated with the
+// information of the current block crerated
+//     id of the block is set to month/date/yyyy
 //
 // @param subjectColor
 //        The color of the subject the assignment is for; ex. Red
@@ -13,9 +16,11 @@
 //        The name for the assignment
 // @param dueTime
 //        The time at which it is due; ex. 11:59pm
+// @param dueDate
+//        The date at which it is due; ex. 7/6/2022
 //
 // @return an element containg the HTML code of the block
-function createAssignmentBlock(subjectColor, assignmentName, dueTime){
+function createAssignmentBlock(subjectColor, assignmentName, dueTime, dueDate){
 
     // creates the outer container to hold the text in
     const assignmentContainer = document.createElement("div");
@@ -55,10 +60,30 @@ function createAssignmentBlock(subjectColor, assignmentName, dueTime){
     assignmentContainer.append(nameContainer, timeContainer);
     // add an event listener
     assignmentContainer.addEventListener("dblclick", deleteAssignmentBlock);
+    // add an id to the container
+    let date = new Date(dueDate);
+    assignmentContainer.setAttribute('id', date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear());
     // return item
     return assignmentContainer;
 }
 
+function addBlockToStorage(month, date, fullYear, name, color, time){
+    if (localStorage.getItem(month.toString() + "/" + date.toString() + "/" + fullYear.toString())){
+        localStorage.setItem(month + "/" + date + "/" + fullYear, localStorage.getItem(month + "/" + date + "/" + fullYear) + ";" + name + "|" + color + "|" + time)
+    }
+    else
+        localStorage.setItem(month.toString() + "/" + date.toString() + "/" + fullYear.toString(),  name + "|" + color + "|" + time);
+}
+
+function addBlockToPage(month, date, fullYear){
+    if (!localStorage.getItem(month + "/" + date + "/" + fullYear))
+        return;
+    let assignmentBlocks = localStorage.getItem(month + "/" + date + "/" + fullYear).split(";");
+    for (const assignmentBlock of assignmentBlocks){
+        let assignmentArr = assignmentBlock.split("|");
+        document.getElementById("c" + new Date(month + "/" + date + "/" + fullYear).getDay()).append(createAssignmentBlock(assignmentArr[1], assignmentArr[0], assignmentArr[2], month + "/" + date + "/" + fullYear));
+    }
+}
 
 // this function creates an event listener for when the form is submitted
 function createFormEventListener() {
@@ -76,7 +101,7 @@ function validateForm(event){
         const formData = new FormData(form);
         // get all the data from the form
         const values = Array.from(formData.values());
-        // check if the assignment name is to long
+        // check if the assignment name is to long *************** cant have | or ;
         if (values[0].length > 256){
             alert("Assignment name too many characters (max 256)");
             event.preventDefault();
@@ -94,11 +119,11 @@ function validateForm(event){
         // ****************** check if time is valid *********************
 
 
-        // all form elements are valid so create the block
-        const assignmentElement = createAssignmentBlock(values[0], values[1], values[2]);
+        // ****************** check if day is valid *********************
 
-        // ******************* add to correct day container *********************
-        document.getElementById("c6").append(assignmentElement);
+        // all form elements are valid so add information to storage
+        let date = new Date(values[2]);
+        addBlockToStorage(date.getMonth()+1, date.getDate(), date.getFullYear(), values[0], values[1], values[3]);
     }
     else{
         console.log("not a form element");
@@ -110,13 +135,42 @@ function deleteAssignmentBlock (event) {
     // gets the target of the double clicks (could be a p/h6 tag or the div for those tags)
     const element = event.target;
     // if its one of the divs that was double clicked
-    if (element.classList.contains("assignment-block-name") || element.classList.contains("assignment-block-time"))
+    if (element.classList.contains("assignment-block-name") || element.classList.contains("assignment-block-time")){
+        // assignment name = element.parentNode.firstChild.firstChild.innerText.toString()
+        // assignment due time = element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1];
+        
+        assignmentsArr = localStorage.getItem(element.parentNode.id).toString().split(";");
+        if (assignmentsArr.length == 1){
+            // remove from local storage
+            localStorage.removeItem(element.parentNode.id);
+        }
+        else {
+            for (let i = 0; i<assignmentsArr.length; i++){
+                // if it contains the name and the due time
+                if (assignmentsArr[i].search(element.parentNode.firstChild.firstChild.innerText.toString()) && assignmentsArr[i].search(element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1])){
+                    assignmentsArr[i] = "";
+                }
+            }
+            // rebuild to have local storage still keep its previous items due that day
+            let newAssignments = new Array();
+            for (assignment of assignmentsArr){
+                if (assignment != "")
+                    newAssignments.push(assignment);
+            }
+            localStorage.setItem(element.parentNode.id, newAssignments.join(";"));
+        }
+        // remove from local storage
+        //localStorage.removeItem(element.parentNode.id);
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.removeChild(element.parentNode);
+    }
     // if its the p tag or h6 tag text that was double clicked
-    else
+    else{
+        // remove from local storage
+        //localStorage.removeItem(element.parentNode.parentNode.id);
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
+    }
 }
 
 // sets the numbers for the days of the week and background for the current day
@@ -130,6 +184,9 @@ function setDayNumbers (d){
     for (let i = currrentDOTWIndex; i >= 0; i--){
         // gets the element and changes the inside content
         document.getElementById("day-" + date.getDay()).innerHTML = weekdays[i] + "<br />" + date.getDate();
+        // displays assignments block for this day
+        addBlockToPage(date.getMonth()+1, date.getDate(), date.getFullYear());
+        // decrements to previous day
         date.setDate(date.getDate() - 1);
     }
     // resets to the current date
@@ -138,6 +195,8 @@ function setDayNumbers (d){
     for (let i = currrentDOTWIndex + 1; i < 7; i++){
         // increments to the next day
         date.setDate(date.getDate() + 1);
+        // displays assignments block for this day
+        addBlockToPage(date.getMonth()+1, date.getDate(), date.getFullYear());
         // gets the element and changes the inside content
         document.getElementById("day-" + date.getDay()).innerHTML = weekdays[i] + "<br />" + date.getDate();
     }
@@ -158,8 +217,11 @@ function setMonthName (d){
     }
 }
 
-
-
+function clearAllBlocks(){
+    for (let i = 0; i<7; i++){
+        document.getElementById("c" + i).replaceChildren();
+    }
+}
 
 
 // holds the current day the screen is showing
@@ -170,6 +232,8 @@ var currentDate = new Date();
 document.getElementById("left-week-arrow").addEventListener("click", function() {
     document.getElementById("day-" + new Date().getDay()).classList.remove("current-day");
     currentDate.setDate(currentDate.getDate() - 7);
+    // remove current blocks on the page
+    clearAllBlocks();
     setDayNumbers(currentDate);
     if (currentDate.getDay() == new Date().getDay() && currentDate.getFullYear() == new Date().getFullYear() && currentDate.getDate() == new Date().getDate()){
         // sets the current day backround to be blue
@@ -181,6 +245,8 @@ document.getElementById("left-week-arrow").addEventListener("click", function() 
 document.getElementById("right-week-arrow").addEventListener("click", function() {
     document.getElementById("day-" + new Date().getDay()).classList.remove("current-day");
     currentDate.setDate(currentDate.getDate() + 7);
+    // remove current blocks on the page
+    clearAllBlocks();
     setDayNumbers(currentDate);
     if (currentDate.getDay() == new Date().getDay() && currentDate.getFullYear() == new Date().getFullYear() && currentDate.getDate() == new Date().getDate()){
         // sets the current day backround to be blue
@@ -205,10 +271,19 @@ setDayNumbers (new Date());
 setMonthName (new Date());
 
 // testing by manually creating the assignment blocks
-const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
-const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
-const assignmentBlock3 = createAssignmentBlock("green", "Quiz 6", "11:59 pm");
-const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm");
-document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
-document.getElementById("c1").append(assignmentBlock4);
+// const assignmentBlock = createAssignmentBlock("blue", "Speech 3", "11:15 am");
+// const assignmentBlock2 = createAssignmentBlock("red", "Homework 6", "12:20 pm");
+// const assignmentBlock3 = createAssignmentBlock("green", "Quiz 6", "11:59 pm");
+// const assignmentBlock4 = createAssignmentBlock("black", "WebWork HW", "11:59 pm");
+// document.getElementById("c3").append(assignmentBlock, assignmentBlock2, assignmentBlock3);
+// document.getElementById("c1").append(assignmentBlock4);
+
+
+// addBlockToPage(7, 3, 2022);
+// addBlockToPage(7, 4, 2022);
+// addBlockToPage(7, 5, 2022);
+// addBlockToPage(7, 6, 2022);
+// addBlockToPage(7, 7, 2022);
+// addBlockToPage(7, 8, 2022);
+// addBlockToPage(7, 9, 2022);
 
