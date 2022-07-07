@@ -136,38 +136,63 @@ function deleteAssignmentBlock (event) {
     const element = event.target;
     // if its one of the divs that was double clicked
     if (element.classList.contains("assignment-block-name") || element.classList.contains("assignment-block-time")){
-        // assignment name = element.parentNode.firstChild.firstChild.innerText.toString()
-        // assignment due time = element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1];
-        
+        // gets all the items in the day
         assignmentsArr = localStorage.getItem(element.parentNode.id).toString().split(";");
+        // if its the only assignment for the day
         if (assignmentsArr.length == 1){
             // remove from local storage
             localStorage.removeItem(element.parentNode.id);
         }
         else {
+            // for every assignment
             for (let i = 0; i<assignmentsArr.length; i++){
                 // if it contains the name and the due time
-                if (assignmentsArr[i].search(element.parentNode.firstChild.firstChild.innerText.toString()) && assignmentsArr[i].search(element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1])){
+                if (!(assignmentsArr[i].search(element.parentNode.firstChild.firstChild.innerText.toString()) && assignmentsArr[i].search(element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1]))){
                     assignmentsArr[i] = "";
                 }
             }
             // rebuild to have local storage still keep its previous items due that day
             let newAssignments = new Array();
             for (assignment of assignmentsArr){
-                if (assignment != "")
+                if (assignment !== "")
                     newAssignments.push(assignment);
             }
+            // remove from local storage
             localStorage.setItem(element.parentNode.id, newAssignments.join(";"));
         }
-        // remove from local storage
-        //localStorage.removeItem(element.parentNode.id);
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.removeChild(element.parentNode);
     }
     // if its the p tag or h6 tag text that was double clicked
     else{
-        // remove from local storage
-        //localStorage.removeItem(element.parentNode.parentNode.id);
+        // assignment name = element.parentNode.firstChild.firstChild.innerText.toString()
+        // assignment due time = element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1];
+
+        // gets all the items in the day
+        assignmentsArr = localStorage.getItem(element.parentNode.parentNode.id).toString().split(";");
+        // if its the only assignment for the day
+        if (assignmentsArr.length == 1){
+            // remove from local storage
+            localStorage.removeItem(element.parentNode.id);
+        }
+        // else if there is more than one
+        else {
+            // for every assignment
+            for (let i = 0; i<assignmentsArr.length; i++){
+                // if it contains the name and the due time
+                if (!(assignmentsArr[i].search(element.parentNode.parentNode.firstChild.firstChild.innerText.toString()) && assignmentsArr[i].search(element.parentNode.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1]))){
+                    assignmentsArr[i] = "";
+                }
+            }
+            // rebuild to have local storage still keep its previous items due that day
+            let newAssignments = new Array();
+            for (assignment of assignmentsArr){
+                if (assignment !== "")
+                    newAssignments.push(assignment);
+            }
+            // remove from local storage
+            localStorage.setItem(element.parentNode.parentNode.id, newAssignments.join(";"));
+        }
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
     }
