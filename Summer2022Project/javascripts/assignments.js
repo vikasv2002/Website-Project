@@ -2,7 +2,7 @@
 // the information needed to display it to the user.
 //
 // Preconditions: subjectColor is a valid CSS color, assignmentName
-// is a valid length, and dueTime is of proper format
+// is a valid length, dueTime and dueDate is of proper format
 // 
 // Postconditions: an EventListener is placed on the return element and
 // when that element is double clicked, it is deleted from the document
