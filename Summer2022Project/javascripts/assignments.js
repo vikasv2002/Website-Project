@@ -165,15 +165,18 @@ function validateForm(event){
         // check if the assignment name is to long
         if (values[0].length > 256){
             alert("Assignment name too many characters (max 256)");
+            // prevents form from submitting
             event.preventDefault();
-            // ************* reset name field ***************
+            // resets name field
+            document.getElementById('assignName').value = '';
             return;
         }
         // checks to see if the name has a | or ;
         if (values[0].includes("|") || values[0].includes(";")){
             alert("Assignment name cannot contain '|' or ';'");
             event.preventDefault();
-            // ************* reset name field ***************
+            // resets name field
+            document.getElementById('assignName').value = '';
             return;
         }
         // check if the color is valid
@@ -181,14 +184,18 @@ function validateForm(event){
         if (!colors.includes(values[1].toLowerCase())){
             alert("Not a valid color!");
             event.preventDefault();
-            // ************* reset color field ***************
+            // reset color field
+            document.getElementById('subjectColor').value = '';
             return;
         }
-        // ****************** check if time is valid *********************
-
-
-        // ****************** check if day is valid *********************
-
+        // check if day is valid
+        if (isNaN(new Date(values[2]))){
+            alert("Not a valid Date format! Try (e.g. mm/dd/yyyy)");
+            event.preventDefault();
+            // reset date field
+            document.getElementById('dueDate').value = '';
+            return;
+        }
         // all form elements are valid so add information to storage
         let date = new Date(values[2]);
         addBlockToStorage(date.getMonth()+1, date.getDate(), date.getFullYear(), values[0], values[1].toLowerCase(), values[3]);
