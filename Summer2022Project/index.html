@@ -80,8 +80,8 @@
 <div id="addAssignmentForm">
     <!-- the add assignments form -->
     <form id="form" class="form-content animate" action="">
-        <!-- x close button top right -->
-        <span onclick="document.getElementById('addAssignmentForm').style.display='none'" class="btn-close" title="Close Form">&times;</span>
+        <!-- x close button top right; resets the form; removes validation css from form -->
+        <span onclick="document.getElementById('addAssignmentForm').style.display='none';document.getElementById('form').reset();document.getElementById('form').classList.remove('was-validated');" class="btn-close" title="Close Form">&times;</span>
         <!-- Assignment Icon on form -->
         <div class="imgcontainer">
             <img src="bin/assignments.jpg" alt="Assignments icon" class="assignmentsIcon">
@@ -89,16 +89,28 @@
         <!-- form body -->
         <div class="container form-body">
             <label for="assignName"><b>Name</b></label>
-            <input id="assignName" type="text" placeholder="Enter Assignment Name" name="assignName" required>
-
+            <div>
+                <input id="assignName" class = "form-control inputEntry" type="text" placeholder="Enter Assignment Name" name="assignName" required>
+                <div class = "invalid-feedback">Cannont contain '|' or ';' and must be less than 256 characters.</div>
+            </div>
+            
             <label for="subjectColor"><b>Subject Color</b></label>
-            <input id="subjectColor" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+            <div>
+                <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+                <div class = "invalid-feedback">Not a valid color!</div>
+            </div>
 
             <label for="dueDate"><b>Due Date</b></label>
-            <input id="dueDate" type="text" placeholder="Enter the Due Date (mm/dd/yyyy)" name="dueDate" required>
+            <div>
+                <input id="dueDate" class = "form-control inputEntry" type="text" placeholder="Enter the Due Date (mm/dd/yyyy)" name="dueDate" required>
+                <div class = "invalid-feedback">Not a valid Date format! Try (e.g. mm/dd/yyyy)</div>
+            </div>
 
             <label for="dueTime"><b>Complete By</b></label>
-            <input id="dueTime" type="text" placeholder="Enter the Due Time" name="dueTime" required>
+            <div>
+                <input id="dueTime" class = "form-control inputEntry" type="text" placeholder="Enter the Due Time" name="dueTime" required>
+                <div class = "invalid-feedback"></div>
+            </div>
 
             <button type="submit" id="assignSubmit">Add</button>
         </div>

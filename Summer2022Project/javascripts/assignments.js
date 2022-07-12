@@ -159,41 +159,53 @@ function validateForm(event){
     var form = event.target;
     // checks to see if the element is a form element
     if (form.tagName == 'FORM' && form.id == "form"){
+        // adds validation css to the form
+        form.classList.add('was-validated');
+        // set to true if one of the fields is invalid
+        var notValid = false;
+        // gather data from form
         const formData = new FormData(form);
         // get all the data from the form
         const values = Array.from(formData.values());
         // check if the assignment name is to long
         if (values[0].length > 256){
-            alert("Assignment name too many characters (max 256)");
             // prevents form from submitting
             event.preventDefault();
             // resets name field
             document.getElementById('assignName').value = '';
-            return;
+            // set not valid boolean to true so function can break
+            notValid = true;
         }
         // checks to see if the name has a | or ;
         if (values[0].includes("|") || values[0].includes(";")){
-            alert("Assignment name cannot contain '|' or ';'");
+            // prevents form from submitting
             event.preventDefault();
             // resets name field
             document.getElementById('assignName').value = '';
-            return;
+            // set not valid boolean to true so function can break
+            notValid = true;
         }
         // check if the color is valid
         const colors = ['red', 'blue', 'black', 'green', 'yellow', 'orange', 'purple', 'pink', 'white']
         if (!colors.includes(values[1].toLowerCase())){
-            alert("Not a valid color!");
+            // prevents form from submitting
             event.preventDefault();
             // reset color field
             document.getElementById('subjectColor').value = '';
-            return;
+            // set not valid boolean to true so function can break
+            notValid = true;
         }
         // check if day is valid
         if (isNaN(new Date(values[2]))){
-            alert("Not a valid Date format! Try (e.g. mm/dd/yyyy)");
+            // prevents form from submitting
             event.preventDefault();
             // reset date field
             document.getElementById('dueDate').value = '';
+            // set not valid boolean to true so function can break
+            notValid = true;
+        }
+        // if any input is not valid, leave the function
+        if (notValid){
             return;
         }
         // all form elements are valid so add information to storage

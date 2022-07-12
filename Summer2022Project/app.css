@@ -138,7 +138,7 @@
 	margin: 24px 0 12px 0;
 }
 
-input[type=text]{
+.inputEntry{
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
