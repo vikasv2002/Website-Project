@@ -88,30 +88,38 @@
         </div>
         <!-- form body -->
         <div class="container form-body">
-            <label for="assignName"><b>Name</b></label>
-            <div>
-                <input id="assignName" class = "form-control inputEntry" type="text" placeholder="Enter Assignment Name" name="assignName" required>
-                <div class = "invalid-feedback">Cannont contain '|' or ';' and must be less than 256 characters.</div>
+            <div class = row style="margin-top: 40px;">
+                <div class = col-6>
+                    <label for="assignName"><b>Name</b></label>
+                    <div>
+                        <input id="assignName" class = "form-control inputEntry" type="text" placeholder="Enter Assignment Name" name="assignName" required>
+                        <div class = "invalid-feedback">Cannont contain '|' or ';' and must be less than 256 characters.</div>
+                    </div>
+                </div>
+                <div class = col-6>
+                    <label for="subjectColor"><b>Subject Color</b></label>
+                    <div>
+                        <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+                        <div class = "invalid-feedback">Not a valid color!</div>
+                    </div>
+                </div>
             </div>
-            
-            <label for="subjectColor"><b>Subject Color</b></label>
-            <div>
-                <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
-                <div class = "invalid-feedback">Not a valid color!</div>
+            <div class = row style="margin-top: 40px; margin-bottom: 40px;">
+                <div class = col-6>
+                    <label for="dueDate"><b>Due Date</b></label>
+                    <div>
+                        <input id="dueDate" class = "form-control inputEntry" type="date" placeholder="Enter the Due Date (mm/dd/yyyy)" name="dueDate" required>
+                        <div class = "invalid-feedback">Not a valid Date format! Try (e.g. mm/dd/yyyy)</div>
+                    </div>
+                </div>
+                <div class = "col-6">
+                    <label for="dueTime"><b>Complete By</b></label>
+                    <div>
+                        <input id="dueTime" class = "form-control inputEntry" type="text" placeholder="Enter when the Assignment is due" name="dueTime" required>
+                        <div class = "invalid-feedback"></div>
+                    </div>
+                </div>
             </div>
-
-            <label for="dueDate"><b>Due Date</b></label>
-            <div>
-                <input id="dueDate" class = "form-control inputEntry" type="date" placeholder="Enter the Due Date (mm/dd/yyyy)" name="dueDate" required>
-                <div class = "invalid-feedback">Not a valid Date format! Try (e.g. mm/dd/yyyy)</div>
-            </div>
-
-            <label for="dueTime"><b>Complete By</b></label>
-            <div>
-                <input id="dueTime" class = "form-control inputEntry" type="text" placeholder="Enter the Due Time" name="dueTime" required>
-                <div class = "invalid-feedback"></div>
-            </div>
-
             <button type="submit" id="assignSubmit">Add</button>
         </div>
     </form>

@@ -118,15 +118,21 @@
 .form-body {
 	padding-left: 150px;
 	padding-right: 150px;
+	min-height: 450px;
 
+}
+
+.form-body label {
+	padding-left: 10px;
 }
 
 .form-content {
 	background-color: #fefefe;
 	margin: 5px auto;
 	border: 1px solid #888;
-	width: 80%; 
+	width: 60%; 
 	padding-bottom: 100px; 
+	min-height: 800px;
 }
 
 #month-name {
@@ -139,7 +145,7 @@
 }
 
 .inputEntry{
-	width: 100%;
+	width: 85%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	display: inline-block;
