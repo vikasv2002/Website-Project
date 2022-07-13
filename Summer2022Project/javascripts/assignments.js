@@ -196,7 +196,7 @@ function validateForm(event){
             notValid = true;
         }
         // check if day is valid
-        if (isNaN(new Date(values[2]))){
+        if (isNaN(new Date(convertingDateFormat(values[2])))){
             // prevents form from submitting
             event.preventDefault();
             // reset date field
@@ -209,13 +209,29 @@ function validateForm(event){
             return;
         }
         // all form elements are valid so add information to storage
-        let date = new Date(values[2]);
+        let date = new Date(convertingDateFormat(values[2]));
         addBlockToStorage(date.getMonth()+1, date.getDate(), date.getFullYear(), values[0], values[1].toLowerCase(), values[3]);
     }
     else{
         console.log("not a form element");
     }
 };
+
+// converts yyyy-mm-dd to mm/dd/yyyy format
+// 
+// Preconditions: n/a
+// 
+// Postconditions: n/a
+// 
+// @param oldDateStr
+//        the string of the day in the old format (yyyy-mm-dd)
+// 
+// @return returns a string in the new format (mm/dd/yyyy)
+function convertingDateFormat (oldDateStr){
+    dateArr = oldDateStr.split('-');
+    dateArr.push(dateArr.shift());
+    return dateArr.join("/");
+}
 
 // deletes an assignment block if it was double clicked
 // 
