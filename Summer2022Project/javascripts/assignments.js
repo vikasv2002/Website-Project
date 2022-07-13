@@ -446,5 +446,15 @@ document.getElementById("right-week-arrow").addEventListener("click", function()
 
 // when the add assignment button is clicked it calls the createEventListener() function
 document.getElementById("addAssignmentBtn").addEventListener("click", async function (){
+    // set the default date in the add assignment button to be today
+    document.getElementById('dueDate').value = new Date().toDateInputValue();
+    // call the function below
     createFormEventListener();
+});
+
+// correct timezone support for toDate Function
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
 });
