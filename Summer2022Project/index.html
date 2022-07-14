@@ -99,8 +99,20 @@
                 <div class = col-6>
                     <label for="subjectColor"><b>Subject Color</b></label>
                     <div>
-                        <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
-                        <div class = "invalid-feedback">Not a valid color!</div>
+                        <select id="subjectColor" class = "form-control inputEntry" name="subjectColor" style = "padding: 0px 20px;" required>
+                            <option value = "DodgerBlue">Blue</option>
+                            <option value = "rgb(254, 39, 18)">Red</option>
+                            <option value = "LimeGreen">Green</option>
+                            <option value = "DarkOrchid">Purple</option>
+                            <option value = "rgb(255, 103, 0)">Orange</option>
+                            <option value = "HotPink">Pink</option>
+                            <option value = "rgb(255, 246, 0)">Yellow</option>
+                        </select>
+
+
+
+                        <!-- <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+                        <div class = "invalid-feedback">Not a valid color!</div> -->
                     </div>
                 </div>
             </div>
@@ -116,7 +128,6 @@
                     <label for="dueTime"><b>Complete By</b></label>
                     <div>
                         <input id="dueTime" class = "form-control inputEntry" type="time" name="dueTime" value = "23:59" required>
-                        <div class = "invalid-feedback"></div>
                     </div>
                 </div>
             </div>

@@ -185,16 +185,6 @@ function validateForm(event){
             // set not valid boolean to true so function can break
             notValid = true;
         }
-        // check if the color is valid
-        const colors = ['red', 'blue', 'black', 'green', 'yellow', 'orange', 'purple', 'pink', 'white']
-        if (!colors.includes(values[1].toLowerCase())){
-            // prevents form from submitting
-            event.preventDefault();
-            // reset color field
-            document.getElementById('subjectColor').value = '';
-            // set not valid boolean to true so function can break
-            notValid = true;
-        }
         // check if day is valid
         if (isNaN(new Date(convertingDateFormat(values[2])))){
             // prevents form from submitting
