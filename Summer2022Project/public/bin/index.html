@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+	<title>Assignments</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/037e4325b4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+
+<body>
+    <!-- main container for everything -->
+    <div class = "container-fluid">
+        <!-- container for the two buttons and the text -->
+        <div class = "container-fluid" id = "button-display-format-container">
+            <!-- Top row containing the buttons and the text -->
+            <div class = "row">
+                <div class = "col-2 button-alignment" style= "justify-content: flex-start;">
+                    <!-- add assignment button -->
+                    <button id = "addAssignmentBtn" onclick="document.getElementById('addAssignmentForm').style.display='block'" class="btn btn-primary" style="width:150px;">Add Assignment</button>
+                </div>
+                <div class = "col-8">
+                    <!-- left week arrow button -->
+                    <!-- display format name (e.g. week, day) -->
+                    <h1 id = "display-format-name"  style = "display: flex; gap: 100px; justify-content: center; align-items: flex-end;">
+                        <i id = "left-week-arrow" class="fa-solid fa-angle-left"></i>
+                        <span id = "month-name"></span>
+                        <i id = "right-week-arrow" class="fa-solid fa-angle-right"></i>
+                    </h1>
+                </div>
+                <div class = "col-2 button-alignment" style= "justify-content: flex-end;">
+                    <!-- sort by button -->
+                    <button class = "btn btn-primary dropdown-toggle" type = "button" id="dropdownMenu2"
+                    data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                    <!-- items contained in the drop down menue -->
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><button class="dropdown-item" type="button">Upcoming</button></li>
+                        <li><button class="dropdown-item" type="button">Week</button></li>
+                        <li><button class="dropdown-item" type="button">Day</button></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+        <!-- container for the days of the week -->
+        <div class = "container-fluid" style="margin-top: 30px;">
+            <!-- row containing the names of the week -->
+            <div class = "row" style="text-align: center;">
+                <div id = "day-0" class = "col dotw"></div>
+                <div id = "day-1" class = "col dotw"></div>
+                <div id = "day-2" class = "col dotw"></div>
+                <div id = "day-3" class = "col dotw"></div>
+                <div id = "day-4" class = "col dotw"></div>
+                <div id = "day-5" class = "col dotw"></div>
+                <div id = "day-6" class = "col last-dotw"></div>
+            </div>
+        </div>
+        <!-- container for the main content grid -->
+        <div class = "container-fluid">
+            <div class="row">
+                <!-- every vertical column to place entries into -->
+                <div id = "c0" class = "col vert-entries"></div>
+                <div id = "c1" class = "col vert-entries"></div>
+                <div id = "c2" class = "col vert-entries"></div>
+                <div id = "c3" class = "col vert-entries"></div>
+                <div id = "c4" class = "col vert-entries"></div>
+                <div id = "c5" class = "col vert-entries"></div>
+                <div id = "c6" class = "col vert-entries"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/assignments.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+
+<!-- add assignment form container -->
+<div id="addAssignmentForm">
+    <!-- the add assignments form -->
+    <form id="form" class="form-content animate" action="">
+        <!-- x close button top right; resets the form; removes validation css from form -->
+        <span onclick="document.getElementById('addAssignmentForm').style.display='none';document.getElementById('form').reset();document.getElementById('form').classList.remove('was-validated');" class="btn-close" title="Close Form">&times;</span>
+        <!-- Assignment Icon on form -->
+        <div class="imgcontainer">
+            <img src="bin/assignments.jpg" alt="Assignments icon" class="assignmentsIcon">
+        </div>
+        <!-- form body -->
+        <div class="container form-body">
+            <div class = row style="margin-top: 40px;">
+                <div class = col-6>
+                    <label for="assignName"><b>Name</b></label>
+                    <div>
+                        <input id="assignName" class = "form-control inputEntry" type="text" placeholder="Enter Assignment Name" name="assignName" required>
+                        <div class = "invalid-feedback">Cannont contain '|' or ';' and must be less than 256 characters.</div>
+                    </div>
+                </div>
+                <div class = col-6>
+                    <label for="subjectColor"><b>Subject Color</b></label>
+                    <div>
+                        <select id="subjectColor" class = "form-control inputEntry" name="subjectColor" style = "padding: 0px 20px;" required>
+                            <option value = "DodgerBlue">Blue</option>
+                            <option value = "rgb(254, 39, 18)">Red</option>
+                            <option value = "LimeGreen">Green</option>
+                            <option value = "DarkOrchid">Purple</option>
+                            <option value = "rgb(255, 103, 0)">Orange</option>
+                            <option value = "HotPink">Pink</option>
+                            <option value = "rgb(255, 246, 0)">Yellow</option>
+                        </select>
+
+
+
+                        <!-- <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
+                        <div class = "invalid-feedback">Not a valid color!</div> -->
+                    </div>
+                </div>
+            </div>
+            <div class = row style="margin-top: 40px; margin-bottom: 40px;">
+                <div class = col-6>
+                    <label for="dueDate"><b>Due Date</b></label>
+                    <div>
+                        <input id="dueDate" class = "form-control inputEntry" type="date" placeholder="Enter the Due Date (mm/dd/yyyy)" name="dueDate" required>
+                        <div class = "invalid-feedback">Not a valid Date format! Try (e.g. mm/dd/yyyy)</div>
+                    </div>
+                </div>
+                <div class = "col-6">
+                    <label for="dueTime"><b>Complete By</b></label>
+                    <div>
+                        <input id="dueTime" class = "form-control inputEntry" type="time" name="dueTime" value = "23:59" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="assignSubmit">Add</button>
+        </div>
+    </form>
+</div>
+</html>
+
+
+
+
+<!-- 
+    // an entry 
+    <div class="container-fluid assignment-block-btn btn" style = "background-image: linear-gradient(to right, red, red 25%, transparent 25%, transparent 100%);">
+        // assignment name container
+        <div class = "container-fluid assignment-block-name">
+            <h6 class = "assignment-name">Speech 3</h6>
+        </div>
+        // complete by container
+        <div class = "container-fluid assignment-block-time">
+            <p class = "assignment-time">Complete by: 11:15am</p>
+        </div>
+    </div>
+ -->
+
+
+  <!-- 
+    // color options
+    <div class = "row" style="height: 66px;">
+        <div class = "col" style="padding: 0;"><div id="colorOptionRed" style="background-color: red; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+        <div class = "col" style="padding: 0;"><div id="colorOptionBlue" style="background-color: blue; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+        <div class = "col" style="padding: 0;"><div id="colorOptionGreen" style="background-color: green; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+        <div class = "col" style="padding: 0;"><div id="colorOptionYellow" style="background-color: yellow; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+        <div class = "col" style="padding: 0;"><div id="colorOptionOrange" style="background-color: orange; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+        <div class = "col" style="padding: 0;"><div id="colorOptionPurple" style="background-color: purple; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+        <div class = "col" style="padding: 0;"><div id="colorOptionPink" style="background-color: pink; width: 100%; height: 50px; margin: 10px 0px;"></div></div>
+    </div>
+  -->
