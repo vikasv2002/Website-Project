@@ -79,7 +79,7 @@
 <!-- add assignment form container -->
 <div id="addAssignmentForm">
     <!-- the add assignments form -->
-    <form id="form" class="form-content animate" action="">
+    <form id="form" class="form-content animate" action="/addAssignment" method="POST">
         <!-- x close button top right; resets the form; removes validation css from form -->
         <span onclick="document.getElementById('addAssignmentForm').style.display='none';document.getElementById('form').reset();document.getElementById('form').classList.remove('was-validated');" class="btn-close" title="Close Form">&times;</span>
         <!-- Assignment Icon on form -->
@@ -93,7 +93,7 @@
                     <label for="assignName"><b>Name</b></label>
                     <div>
                         <input id="assignName" class = "form-control inputEntry" type="text" placeholder="Enter Assignment Name" name="assignName" required>
-                        <div class = "invalid-feedback">Cannont contain '|' or ';' and must be less than 256 characters.</div>
+                        <div class = "invalid-feedback">Cannont contain '|' or ';' or '`' and must be less than 256 characters.</div>
                     </div>
                 </div>
                 <div class = col-6>

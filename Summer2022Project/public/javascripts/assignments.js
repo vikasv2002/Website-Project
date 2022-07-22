@@ -176,8 +176,8 @@ function validateForm(event){
             // set not valid boolean to true so function can break
             notValid = true;
         }
-        // checks to see if the name has a | or ;
-        if (values[0].includes("|") || values[0].includes(";")){
+        // checks to see if the name has a | or ; or `
+        if (values[0].includes("|") || values[0].includes(";") || values[0].includes("\`")){
             // prevents form from submitting
             event.preventDefault();
             // resets name field
@@ -270,6 +270,22 @@ function deleteAssignmentBlock (event) {
         }
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.removeChild(element.parentNode);
+
+        // send a POST request to delete it from the file database
+        let data = {
+            assignName: element.parentNode.firstChild.firstChild.innerText.toString(),
+            subjectColor: element.parentNode.style.accentColor.toString(),
+            dueDate: element.parentNode.id,
+            dueTime: element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1]
+        }
+        let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        } 
+        fetch('http://localhost:3000/deleteAssignment', options);
     }
     // if its the p tag or h6 tag text that was double clicked
     else{
@@ -305,6 +321,22 @@ function deleteAssignmentBlock (event) {
         }
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
+
+        // send a POST request to delete it from the file database
+        let data = {
+            assignName: element.parentNode.parentNode.firstChild.firstChild.innerText.toString(),
+            subjectColor: element.parentNode.parentNode.style.accentColor.toString(),
+            dueDate: element.parentNode.parentNode.id,
+            dueTime: element.parentNode.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1]
+        }
+        let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+        fetch('http://localhost:3000/deleteAssignment', options);
     }
 }
 
