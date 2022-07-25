@@ -46,7 +46,6 @@ server.listen(port, function(error){
 });
 
 
-// mm/dd/yyyy ...;name|color|time
 function addBlockToFile(formInput){
     // checks if input is empty
     if(JSON.stringify(formInput) === '{}')

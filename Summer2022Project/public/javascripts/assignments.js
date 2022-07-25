@@ -271,20 +271,23 @@ function deleteAssignmentBlock (event) {
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.removeChild(element.parentNode);
 
-        // send a POST request to delete it from the file database
+    // send a POST request to delete it from the file database
+        // holds data to send
         let data = {
             assignName: element.parentNode.firstChild.firstChild.innerText.toString(),
             subjectColor: element.parentNode.style.accentColor.toString(),
             dueDate: element.parentNode.id,
             dueTime: element.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1]
         }
+        // holds the options of the POST request
         let options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        } 
+        }
+        // sends the request
         fetch('http://localhost:3000/deleteAssignment', options);
     }
     // if its the p tag or h6 tag text that was double clicked
@@ -322,13 +325,15 @@ function deleteAssignmentBlock (event) {
         // remove the outer most div container for the assignment block
         element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
 
-        // send a POST request to delete it from the file database
+    // send a POST request to delete it from the file database
+        // holds data to send
         let data = {
             assignName: element.parentNode.parentNode.firstChild.firstChild.innerText.toString(),
             subjectColor: element.parentNode.parentNode.style.accentColor.toString(),
             dueDate: element.parentNode.parentNode.id,
             dueTime: element.parentNode.parentNode.lastChild.firstChild.innerText.toString().split(": ")[1]
         }
+        // holds the options of the POST request
         let options = {
             method: 'POST',
             headers: {
@@ -336,6 +341,7 @@ function deleteAssignmentBlock (event) {
             },
             body: JSON.stringify(data)
         }
+        // sends the request
         fetch('http://localhost:3000/deleteAssignment', options);
     }
 }
