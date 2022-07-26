@@ -26,6 +26,16 @@ server.get("/", function(req, res){
     res.render("index.ejs");
 })
 
+// loads login page
+server.get("/login", function(req, res){
+    res.render("loginPage.ejs");
+})
+
+// loads register page
+server.get("/register", function(req, res){
+    res.send("loginPage.ejs");
+})
+
 //  ************** add a page not found
 
 // on a post request, take the information and add it to the file
