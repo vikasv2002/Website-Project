@@ -1,21 +1,27 @@
 // need npm install express, ejs, body-parser --save
 // used npm install -g nodemon
 
+// declare variables
 var express = require("express");
 var server = express();
 var bodyParser = require("body-parser");
 var fs = require("fs");
 const path = require('path');
+// string variable representing path to data.txt file
 const pathToDataFile = path.join(__dirname, '..', 'files', 'data.txt');
 const port = 3000;
 server.use(express.static("public"));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(express.json({limit: "1mb"}))
+// array to hold assignment entries
 var assignmentEntries;
+
+// reads the file and populates assignmentEntries array
 fs.readFile(pathToDataFile, 'utf-8', (err, data) => {
     assignmentEntries = data.split("\r\n");
 })
 
+// loads home page
 server.get("/", function(req, res){
     res.render("index.ejs");
 })
