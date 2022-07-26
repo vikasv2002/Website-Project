@@ -33,7 +33,7 @@ server.get("/login", function(req, res){
 
 // loads register page
 server.get("/register", function(req, res){
-    res.send("loginPage.ejs");
+    res.render("registerPage.ejs");
 })
 
 //  ************** add a page not found
