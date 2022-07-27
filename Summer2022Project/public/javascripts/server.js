@@ -1,20 +1,47 @@
-// need npm install express, ejs, body-parser --save
+// need npm install express, ejs, body-parser, bcrypt --save
+// need npm install passport passport-local express-session express-flash method-override
 // used npm install -g nodemon
+
+const dotenv = require('dotenv').config()
 
 // declare variables
 var express = require("express");
 var server = express();
 var bodyParser = require("body-parser");
 var fs = require("fs");
+const bcrypt = require('bcrypt')
 const path = require('path');
+const passport = require('passport');
+const flash = require('express-flash')
+const session = require('express-session')
+const initializePassport = require ('./passport-config');
+const { ServerResponse } = require('http');
+const methodOverride = require('method-override')
+initializePassport(
+    passport, 
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+
+);
 // string variable representing path to data.txt file
 const pathToDataFile = path.join(__dirname, '..', 'files', 'data.txt');
 const port = 3000;
 server.use(express.static("public"));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(express.json({limit: "1mb"}))
+server.use(flash())
+server.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+server.use(passport.initialize())
+server.use(passport.session())
+server.use(methodOverride('_method'))
 // array to hold assignment entries
 var assignmentEntries;
+// array to hold user information
+const users = []
 
 // reads the file and populates assignmentEntries array
 fs.readFile(pathToDataFile, 'utf-8', (err, data) => {
@@ -22,35 +49,72 @@ fs.readFile(pathToDataFile, 'utf-8', (err, data) => {
 })
 
 // loads home page
-server.get("/", function(req, res){
+server.get("/", checkAuthenticated, function(req, res){
     res.render("index.ejs");
 })
 
 // loads login page
-server.get("/login", function(req, res){
+server.get("/login", checkNotAuthenticated, function(req, res){
     res.render("loginPage.ejs");
 })
 
 // loads register page
-server.get("/register", function(req, res){
+server.get("/register", checkNotAuthenticated, function(req, res){
     res.render("registerPage.ejs");
 })
 
 //  ************** add a page not found
 
 // on a post request, take the information and add it to the file
-server.post("/addAssignment", function(req, res){
+server.post("/addAssignment", checkAuthenticated, function(req, res){
     addBlockToFile(req.body);
     // send you back to the home page
     res.redirect("/");
 })
 
 // deletes information for a user
-server.post("/deleteAssignment", function(req, res){
+server.post("/deleteAssignment", checkAuthenticated, function(req, res){
     deleteBlockFromFile(req.body);
     // send you back to the home page
     res.redirect("/");
 })
+
+// gets register information for a user
+server.post("/register", checkNotAuthenticated, async function(req, res){
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        users.push({
+            id: Date.now().toString(),
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword
+
+        })
+        res.redirect('/login')
+    } catch (error) {
+        console.log(error)
+        res.redirect('/register')
+    }
+})
+
+// logging in
+server.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
+
+// to logout
+server.delete('/logout', function(req, res){
+    req.logOut(function (err){
+        if (err) {
+            return next (err);
+        }
+        res.redirect("/login");
+    });
+    
+})
+
 
 // has the application listen on the port provided
 server.listen(port, function(error){
@@ -192,4 +256,23 @@ function convertingDateFormat (oldDateStr){
     dateArr = oldDateStr.split('-');
     dateArr.push(dateArr.shift());
     return dateArr.join("/");
+}
+
+
+
+function checkAuthenticated(req, res, next){
+    if (req.isAuthenticated()){
+        return next()
+    }
+
+    res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next){
+    if (req.isAuthenticated()){
+        return res.redirect('/')
+    }
+    next()
+
+    
 }

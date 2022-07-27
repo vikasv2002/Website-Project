@@ -34,6 +34,9 @@
                     <!-- sort by button -->
                     <button class = "btn btn-primary dropdown-toggle" type = "button" id="dropdownMenu2"
                     data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class = "btn btn-primary" style = "margin-left: 10px;">Log Out</button>
+                    </form>
                     <!-- items contained in the drop down menue -->
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li><button class="dropdown-item" type="button">Upcoming</button></li>
@@ -108,11 +111,6 @@
                             <option value = "HotPink">Pink</option>
                             <option value = "rgb(255, 246, 0)">Yellow</option>
                         </select>
-
-
-
-                        <!-- <input id="subjectColor" class = "form-control inputEntry" type="text" placeholder="Enter Subject Color" name="subjectColor" required>
-                        <div class = "invalid-feedback">Not a valid color!</div> -->
                     </div>
                 </div>
             </div>

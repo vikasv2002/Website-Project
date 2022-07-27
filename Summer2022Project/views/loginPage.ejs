@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="login.css">
 </head>
 <body>
+    <% if (messages.error) { %>
+        <%= messages.error %>
+    <% } %>
     <section class="vh-100">
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -17,7 +20,7 @@
                     class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form>
+                    <form action = "/login" method = "POST">
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                             <p class="lead fw-normal mb-0 me-3">Sign in with</p>
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Feature Coming Soon!">
@@ -45,15 +48,15 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <label class="form-label" for="form3Example3">Email address</label>
-                            <input type="email" id="form3Example3" class="form-control form-control-lg"
+                            <label class="form-label" for="email">Email address</label>
+                            <input type="email" id="email" name = "email" class="form-control form-control-lg"
                             placeholder="Enter a valid email address" />
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-3">
-                            <label class="form-label" for="form3Example4">Password</label>
-                            <input type="password" id="form3Example4" class="form-control form-control-lg"
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" id="password" name = "password" class="form-control form-control-lg"
                             placeholder="Enter password" />
                         </div>
 
@@ -65,12 +68,11 @@
                             Remember me
                         </label>
                         </div>
-                            <!-- <a href="#!" class="text-body">Forgot password?</a> -->
                             <p class = "disabled-link" data-toggle="tooltip" data-placement="top" title="Feature Coming Soon!">Forgot password?</p>
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="button" class="btn btn-primary btn-lg"
+                            <button type="submit" class="btn btn-primary btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
                             class="link-danger">Register</a></p>
