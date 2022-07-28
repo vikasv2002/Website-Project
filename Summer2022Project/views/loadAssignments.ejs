@@ -1,0 +1,15 @@
+<script>
+    // clear the local storage
+    localStorage.clear();
+    var assignmentEntries = <%- JSON.stringify(data) %>
+    // update the local storage
+    for(let i = 0; i<assignmentEntries.length; i++){
+        if (assignmentEntries[i] == ""){
+            continue;
+        }
+        let tempEntry = assignmentEntries[i].split('`')
+        localStorage.setItem(tempEntry[0], tempEntry[1]);
+    }
+    // send user to home page '/'
+    window.location.pathname = '/'
+</script>

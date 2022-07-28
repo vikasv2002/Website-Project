@@ -25,7 +25,7 @@ initializePassport(
 );
 // string variable representing path to data.txt file
 const pathToDataFile = path.join(__dirname, '..', 'files', 'data.txt');
-const port = 3000;
+const PORT = process.env.port || 3000;
 server.use(express.static("public"));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(express.json({limit: "1mb"}))
@@ -63,7 +63,10 @@ server.get("/register", checkNotAuthenticated, function(req, res){
     res.render("registerPage.ejs");
 })
 
-//  ************** add a page not found
+// has the client side populate its local storage
+server.get("/loadData", checkAuthenticated, function(req, res){
+    res.render("loadAssignments.ejs", {data: assignmentEntries});
+})
 
 // on a post request, take the information and add it to the file
 server.post("/addAssignment", checkAuthenticated, function(req, res){
@@ -99,7 +102,7 @@ server.post("/register", checkNotAuthenticated, async function(req, res){
 
 // logging in
 server.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/loadData',
     failureRedirect: '/login',
     failureFlash: true
 }))
@@ -117,14 +120,14 @@ server.delete('/logout', function(req, res){
 
 
 // has the application listen on the port provided
-server.listen(port, function(error){
+server.listen(PORT, function(error){
     // if there was an error, display it to console
     if (error){
         console.log('Something went wrong',  error)
     }
     // else, log what port the server is listening on
     else {
-        console.log('Server is listening on port ' + port);
+        console.log('Server is listening on port ' + PORT);
     }
 });
 
