@@ -7,6 +7,7 @@
 // declare variables
 var express = require("express");
 var server = express();
+/*
 var bodyParser = require("body-parser");
 var fs = require("fs");
 const bcrypt = require('bcrypt')
@@ -23,7 +24,7 @@ initializePassport(
     id => users.find(user => user.id === id)
 
 );
-
+*/
 server.get("/", function(req, res){
     res.send("7:40")
 })
