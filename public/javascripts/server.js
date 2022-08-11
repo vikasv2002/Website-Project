@@ -25,19 +25,10 @@ initializePassport(
 );
 
 server.get("/", function(req, res){
-    res.send("7:35")
+    res.send("7:40")
 })
 // has the application listen on the port provided
-server.listen(PORT, function(error){
-    // if there was an error, display it to console
-    if (error){
-        console.log('Something went wrong',  error)
-    }
-    // else, log what port the server is listening on
-    else {
-        console.log('Server is listening on port ' + PORT);
-    }
-});
+server.listen(process.env.PORT || 3000);
 /*
 // string variable representing path to data.txt file
 const pathToDataFile = path.join(__dirname, '..', 'files', 'data.txt');
