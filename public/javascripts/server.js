@@ -1,9 +1,6 @@
 // need npm install express ejs body-parser bcrypt --save
 // need npm install passport passport-local express-session express-flash method-override --save
 // used npm install -g nodemon
-
-//const dotenv = require('dotenv').config()
-
 // declare variables
 var express = require("express");
 var server = express();
@@ -13,6 +10,7 @@ var fs = require("fs");
 const bcrypt = require('bcrypt')
 const path = require('path');
 const passport = require('passport');
+*/
 const flash = require('express-flash')
 const session = require('express-session')
 const initializePassport = require (path.join(__dirname, '..', 'passport-config'));
@@ -24,7 +22,6 @@ initializePassport(
     id => users.find(user => user.id === id)
 
 );
-*/
 server.get("/", function(req, res){
     res.send("7:40")
 })
