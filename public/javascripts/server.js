@@ -25,7 +25,7 @@ initializePassport(
 );
 // string variable representing path to data.txt file
 const pathToDataFile = path.join(__dirname, '..', 'files', 'data.txt');
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 server.use(express.static("public"));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(express.json({limit: "1mb"}))
@@ -46,6 +46,9 @@ const users = []
 // reads the file and populates assignmentEntries array
 fs.readFile(pathToDataFile, 'utf-8', (err, data) => {
     assignmentEntries = data.split("\r\n");
+})
+server.get("/", function(req, res){
+    res.send("7:35")
 })
 
 // loads home page
