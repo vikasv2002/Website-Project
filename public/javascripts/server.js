@@ -14,7 +14,7 @@ const path = require('path');
 const passport = require('passport');
 const flash = require('express-flash')
 const session = require('express-session')
-const initializePassport = require ('./passport-config');
+const initializePassport = require (path.join(__dirname, 'passport-config'));
 const { ServerResponse } = require('http');
 const methodOverride = require('method-override')
 initializePassport(
