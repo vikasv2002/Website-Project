@@ -23,6 +23,22 @@ initializePassport(
     id => users.find(user => user.id === id)
 
 );
+
+server.get("/", function(req, res){
+    res.send("7:35")
+})
+// has the application listen on the port provided
+server.listen(PORT, function(error){
+    // if there was an error, display it to console
+    if (error){
+        console.log('Something went wrong',  error)
+    }
+    // else, log what port the server is listening on
+    else {
+        console.log('Server is listening on port ' + PORT);
+    }
+});
+/*
 // string variable representing path to data.txt file
 const pathToDataFile = path.join(__dirname, '..', 'files', 'data.txt');
 const PORT = process.env.PORT || 3000;
@@ -46,9 +62,6 @@ const users = []
 // reads the file and populates assignmentEntries array
 fs.readFile(pathToDataFile, 'utf-8', (err, data) => {
     assignmentEntries = data.split("\r\n");
-})
-server.get("/", function(req, res){
-    res.send("7:35")
 })
 
 // loads home page
@@ -282,3 +295,4 @@ function checkNotAuthenticated(req, res, next){
 
     
 }
+*/
