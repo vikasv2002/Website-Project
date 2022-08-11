@@ -1,5 +1,5 @@
-// need npm install express, ejs, body-parser, bcrypt --save
-// need npm install passport passport-local express-session express-flash method-override
+// need npm install express ejs body-parser bcrypt --save
+// need npm install passport passport-local express-session express-flash method-override --save
 // used npm install -g nodemon
 
 const dotenv = require('dotenv').config()
