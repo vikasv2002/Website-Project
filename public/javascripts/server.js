@@ -8,7 +8,6 @@ var server = express();
 var bodyParser = require("body-parser");
 var fs = require("fs");
 const bcrypt = require('bcrypt');
-/*
 const path = require('path');
 const passport = require('passport');
 const flash = require('express-flash')
@@ -22,7 +21,6 @@ initializePassport(
     id => users.find(user => user.id === id)
 
 );
-*/
 server.get("/", function(req, res){
     res.send("7:40")
 })
