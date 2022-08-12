@@ -7,10 +7,10 @@ var server = express();
 
 var bodyParser = require("body-parser");
 var fs = require("fs");
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+/*
 const path = require('path');
 const passport = require('passport');
-/*
 const flash = require('express-flash')
 const session = require('express-session')
 const initializePassport = require (path.join(__dirname, '..', 'passport-config'));
