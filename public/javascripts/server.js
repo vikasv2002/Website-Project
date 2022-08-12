@@ -29,7 +29,7 @@ server.use(bodyParser.urlencoded({extended: true}));
 server.use(express.json({limit: "1mb"}))
 server.use(flash())
 server.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }))
