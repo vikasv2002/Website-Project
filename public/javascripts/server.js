@@ -12,18 +12,18 @@ const path = require('path');
 const passport = require('passport');
 const flash = require('express-flash')
 const session = require('express-session')
-const initializePassport = require (path.join(__dirname, '..', 'passport-config'));
-const { ServerResponse } = require('http');
-const methodOverride = require('method-override')
-initializePassport(
-    passport, 
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
+// const initializePassport = require (path.join(__dirname, '..', 'passport-config'));
+// const { ServerResponse } = require('http');
+// const methodOverride = require('method-override')
+// initializePassport(
+//     passport, 
+//     email => users.find(user => user.email === email),
+//     id => users.find(user => user.id === id)
 
-);
-server.get("/", function(req, res){
-    res.send("7:40")
-})
+// );
+// server.get("/", function(req, res){
+//     res.send("7:40")
+// });
 // has the application listen on the port provided
 server.listen(process.env.PORT || 3000);
 /*
