@@ -1,4 +1,4 @@
-// need npm install express ejs body-parser bcrypt --save
+// need npm install express ejs body-parser bcrypt dotenv --save
 // need npm install passport passport-local express-session express-flash method-override --save
 // used npm install -g nodemon
 // declare variables
@@ -45,7 +45,7 @@ const users = []
 
 
 server.get("/", function(req, res){
-    res.send("7:40")
+    res.send("12:50")
 });
 // has the application listen on the port provided
 server.listen(process.env.PORT || 3000);
