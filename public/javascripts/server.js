@@ -2,6 +2,8 @@
 // need npm install passport passport-local express-session express-flash method-override --save
 // used npm install -g nodemon
 // declare variables
+const dotenv = require('dotenv').config()
+
 var express = require("express");
 var server = express();
 
