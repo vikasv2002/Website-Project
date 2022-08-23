@@ -44,12 +44,12 @@ var assignmentEntries;
 const users = []
 
 
-server.get("/", function(req, res){
-    res.send("12:50")
-});
-// has the application listen on the port provided
-server.listen(process.env.PORT || 3000);
-/*
+// server.get("/", function(req, res){
+//     res.send("12:50")
+// });
+// // has the application listen on the port provided
+// server.listen(process.env.PORT || 3000);
+
 // reads the file and populates assignmentEntries array
 fs.readFile(pathToDataFile, 'utf-8', (err, data) => {
     assignmentEntries = data.split("\r\n");
@@ -286,4 +286,3 @@ function checkNotAuthenticated(req, res, next){
 
     
 }
-*/
